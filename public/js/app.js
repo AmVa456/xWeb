@@ -234,9 +234,10 @@ async function loadRSSFeeds(widgetId) {
             feed.items.slice(0, 5).forEach(item => {
                 const feedItem = document.createElement('div');
                 feedItem.className = 'feed-item';
+                const description = item.description ? item.description.substring(0, 150) : '';
                 feedItem.innerHTML = `
                     <h3>${item.title}</h3>
-                    <p>${item.description.substring(0, 150)}...</p>
+                    <p>${description}${description ? '...' : ''}</p>
                     <div class="feed-meta">${feed.name} • ${item.pubDate}</div>
                 `;
                 content.appendChild(feedItem);

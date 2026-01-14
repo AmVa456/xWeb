@@ -62,13 +62,22 @@ wss.on('connection', (ws) => {
 function handleWebSocketMessage(ws, data) {
   switch (data.type) {
     case 'terminal':
-      // Handle terminal commands
+      // Handle terminal commands with basic validation
       if (data.command) {
         const { exec } = require('child_process');
-        exec(data.command, (error, stdout, stderr) => {
+        // Basic command sanitization - prevent command chaining
+        const sanitizedCommand = data.command.split(/[;&|`$]/)[0].trim();
+        
+        exec(sanitizedCommand, { timeout: 10000, maxBuffer: 1024 * 1024 }, (error, stdout, stderr) => {
+          let output = '';
+          if (error) {
+            output = `Error: ${error.message}\n${stderr}`;
+          } else {
+            output = stdout || stderr;
+          }
           ws.send(JSON.stringify({
             type: 'terminal',
-            output: error ? stderr : stdout
+            output: output
           }));
         });
       }

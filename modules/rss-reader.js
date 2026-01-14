@@ -102,7 +102,11 @@ module.exports = {
   
   removeFeed: (req, res) => {
     const id = parseInt(req.params.id);
+    const initialLength = feeds.length;
     feeds = feeds.filter(f => f.id !== id);
+    if (feeds.length === initialLength) {
+      return res.status(404).json({ success: false, error: 'Feed not found' });
+    }
     res.json({ success: true });
   }
 };

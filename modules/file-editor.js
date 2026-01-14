@@ -57,11 +57,12 @@ module.exports = {
       return res.status(400).json({ error: 'File path required' });
     }
     
-    const fullPath = path.join(WORKSPACE_DIR, filePath);
+    const fullPath = path.resolve(path.join(WORKSPACE_DIR, filePath));
     
-    // Security check: ensure path is within workspace
-    if (!fullPath.startsWith(WORKSPACE_DIR)) {
-      return res.status(403).json({ error: 'Access denied' });
+    // Security check: ensure path is within workspace using relative path check
+    const relativePath = path.relative(WORKSPACE_DIR, fullPath);
+    if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+      return res.status(403).json({ error: 'Access denied: Path outside workspace' });
     }
     
     try {
@@ -85,11 +86,12 @@ module.exports = {
       return res.status(400).json({ error: 'File path and content required' });
     }
     
-    const fullPath = path.join(WORKSPACE_DIR, filePath);
+    const fullPath = path.resolve(path.join(WORKSPACE_DIR, filePath));
     
-    // Security check: ensure path is within workspace
-    if (!fullPath.startsWith(WORKSPACE_DIR)) {
-      return res.status(403).json({ error: 'Access denied' });
+    // Security check: ensure path is within workspace using relative path check
+    const relativePath = path.relative(WORKSPACE_DIR, fullPath);
+    if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+      return res.status(403).json({ error: 'Access denied: Path outside workspace' });
     }
     
     try {
