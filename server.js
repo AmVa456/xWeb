@@ -3,6 +3,7 @@ const http = require('http');
 const WebSocket = require('ws');
 const path = require('path');
 const fs = require('fs');
+const { exec } = require('child_process');
 
 const app = express();
 const server = http.createServer(app);
@@ -64,9 +65,8 @@ function handleWebSocketMessage(ws, data) {
     case 'terminal':
       // Handle terminal commands with basic validation
       if (data.command) {
-        const { exec } = require('child_process');
-        // Basic command sanitization - prevent command chaining
-        const sanitizedCommand = data.command.split(/[;&|`$]/)[0].trim();
+        // Basic command sanitization - prevent command chaining and subshells
+        const sanitizedCommand = data.command.split(/[;&|`$()]/)[0].trim();
         
         exec(sanitizedCommand, { timeout: 10000, maxBuffer: 1024 * 1024 }, (error, stdout, stderr) => {
           let output = '';

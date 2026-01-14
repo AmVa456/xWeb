@@ -61,7 +61,7 @@ module.exports = {
     
     // Security check: ensure path is within workspace using relative path check
     const relativePath = path.relative(WORKSPACE_DIR, fullPath);
-    if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+    if (relativePath.startsWith('..') || relativePath.includes('..')) {
       return res.status(403).json({ error: 'Access denied: Path outside workspace' });
     }
     
@@ -90,7 +90,7 @@ module.exports = {
     
     // Security check: ensure path is within workspace using relative path check
     const relativePath = path.relative(WORKSPACE_DIR, fullPath);
-    if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+    if (relativePath.startsWith('..') || relativePath.includes('..')) {
       return res.status(403).json({ error: 'Access denied: Path outside workspace' });
     }
     
