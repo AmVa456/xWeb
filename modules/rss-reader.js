@@ -10,6 +10,17 @@ let feeds = [
   }
 ];
 
+function sanitizeHTML(html) {
+  if (!html) return '';
+  // Remove all script tags and their content (including malformed ones)
+  let sanitized = html.replace(/<script[^>]*>[\s\S]*?<\/script\s*>/gi, '');
+  // Remove any remaining HTML tags
+  sanitized = sanitized.replace(/<[^>]*>/g, '');
+  // Remove CDATA sections
+  sanitized = sanitized.replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1');
+  return sanitized;
+}
+
 function parseRSS(xml) {
   const items = [];
   const itemRegex = /<item>([\s\S]*?)<\/item>/g;
@@ -27,9 +38,9 @@ function parseRSS(xml) {
     const pubDate = pubDateRegex.exec(itemXml);
     
     items.push({
-      title: title ? title[1].replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1').replace(/<script[^>]*>.*?<\/script>/gi, '') : '',
+      title: title ? sanitizeHTML(title[1]) : '',
       link: link ? link[1] : '',
-      description: desc ? desc[1].replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1').replace(/<[^>]*>/g, '').replace(/<script[^>]*>.*?<\/script>/gi, '') : '',
+      description: desc ? sanitizeHTML(desc[1]) : '',
       pubDate: pubDate ? pubDate[1] : ''
     });
   }
