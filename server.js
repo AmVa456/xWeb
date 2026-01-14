@@ -23,6 +23,8 @@ const diagnostics = require('./modules/diagnostics');
 const fileEditor = require('./modules/file-editor');
 
 // API Routes
+// Note: Rate limiting intentionally omitted for local development dashboard
+// Add rate limiting middleware (e.g., express-rate-limit) for production deployments
 app.get('/api/rss/feeds', rssReader.getFeeds);
 app.post('/api/rss/add', rssReader.addFeed);
 app.delete('/api/rss/remove/:id', rssReader.removeFeed);

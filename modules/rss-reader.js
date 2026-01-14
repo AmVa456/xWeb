@@ -27,9 +27,9 @@ function parseRSS(xml) {
     const pubDate = pubDateRegex.exec(itemXml);
     
     items.push({
-      title: title ? title[1].replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1') : '',
+      title: title ? title[1].replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1').replace(/<script[^>]*>.*?<\/script>/gi, '') : '',
       link: link ? link[1] : '',
-      description: desc ? desc[1].replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1').replace(/<[^>]*>/g, '') : '',
+      description: desc ? desc[1].replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1').replace(/<[^>]*>/g, '').replace(/<script[^>]*>.*?<\/script>/gi, '') : '',
       pubDate: pubDate ? pubDate[1] : ''
     });
   }
