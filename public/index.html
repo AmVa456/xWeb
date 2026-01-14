@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xWeb - Developer Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>🚀 xWeb Developer Dashboard</h1>
+        <div class="header-controls">
+            <button id="addWidgetBtn" class="btn">+ Add Widget</button>
+            <button id="resetLayoutBtn" class="btn btn-secondary">Reset Layout</button>
+        </div>
+    </header>
+
+    <div id="addWidgetModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add Widget</h2>
+            <div class="widget-options">
+                <button class="widget-option" data-widget="rss">📰 RSS Feeds</button>
+                <button class="widget-option" data-widget="irc">💬 IRC Client</button>
+                <button class="widget-option" data-widget="social">📱 Social Media</button>
+                <button class="widget-option" data-widget="diagnostics">🔧 System Diagnostics</button>
+                <button class="widget-option" data-widget="editor">📝 Code Editor</button>
+                <button class="widget-option" data-widget="terminal">💻 Terminal</button>
+            </div>
+        </div>
+    </div>
+
+    <main id="dashboard">
+        <!-- Widgets will be added here dynamically -->
+    </main>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
