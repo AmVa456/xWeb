@@ -98,6 +98,16 @@ xWeb/
 - Path validation prevents directory traversal attacks
 - Terminal commands run in isolated child processes
 
+## 🔒 Security
+
+⚠️ **Important**: xWeb is designed for **local development use only**. 
+
+- Intended for use on `localhost` by a single trusted user
+- Not hardened for production or public internet exposure
+- See [SECURITY.md](SECURITY.md) for detailed security considerations
+
+For production deployment, additional security measures are required (authentication, rate limiting, input validation, etc.).
+
 ## 🛠️ Development
 
 The codebase is designed with modularity in mind:
