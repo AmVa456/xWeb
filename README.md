@@ -1,6 +1,12 @@
 # xWeb - Developer Dashboard
 
+[![Documentation](https://img.shields.io/badge/docs-live-blue.svg)](https://amva456.github.io/xWeb/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](https://nodejs.org/)
+
 A lightweight, modular developer dashboard with real-time monitoring capabilities. Built with minimal dependencies for maximum performance.
+
+📚 **[View Full Documentation](https://amva456.github.io/xWeb/)** | 🚀 **[Deployment Guide](DEPLOYMENT.md)**
 
 ## 🚀 Features
 
@@ -34,6 +40,19 @@ The application runs on port 3000 by default. You can change this by setting the
 ```bash
 PORT=8080 npm start
 ```
+
+## 🌐 Deployment
+
+Deploy xWeb to your favorite platform:
+
+- **Railway** - One-click deployment [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template)
+- **Render** - Free tier with auto-deploy
+- **Heroku** - Platform as a service
+- **DigitalOcean** - App Platform starting at $5/month
+- **Docker** - Containerized deployment
+- **Self-Hosted** - VPS with PM2 and Nginx
+
+📖 **[View Detailed Deployment Guide](DEPLOYMENT.md)** for platform-specific instructions, environment configuration, and production best practices.
 
 ## 📚 Widget Types
 
